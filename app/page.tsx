@@ -8,7 +8,7 @@ export default function HomePage() {
 
   const [teams, setTeams] = useState<any[]>([])
   const [standings, setStandings] = useState<any[]>([])
-
+  
   useEffect(() => {
     fetchTeams()
     fetchStandings()
@@ -76,9 +76,9 @@ export default function HomePage() {
 
       {/* HEADER */}
       <h1 style={title}>🏆 Liga del Pacífico</h1>
-      <p style={subtitle}>Softball League Manager</p>
-
+      
       {/* QUICK ACTIONS */}
+      
       <div style={actions}>
         <Link href="/create-game"><button style={btn}>⚾ Crear Juego</button></Link>
         <Link href="/teams"><button style={btn}>🏆 Equipos</button></Link>
@@ -89,6 +89,7 @@ export default function HomePage() {
       {/* STANDINGS */}
       <h2 style={{ marginTop: "40px" }}>🏆 Standings</h2>
 
+      <div style={{ overflowX: "auto" }}>
       <table style={table}>
         <thead>
           <tr>
@@ -110,6 +111,7 @@ export default function HomePage() {
           ))}
         </tbody>
       </table>
+      </div>
 
       {/* TEAMS GRID */}
       <h2 style={{ marginTop: "40px" }}>Equipos</h2>
@@ -150,13 +152,13 @@ export default function HomePage() {
 /* STYLES */
 
 const container = {
-  padding: "40px",
+  padding: "20px",
   background: "#f5f6f7",
   minHeight: "100vh"
 }
 
 const title = {
-  fontSize: "32px",
+  fontSize: "24px",
   fontWeight: "bold"
 }
 
@@ -166,18 +168,18 @@ const subtitle = {
 }
 
 const actions = {
-  display: "flex",
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
   gap: "10px",
   marginTop: "20px"
 }
 
 const btn = {
-  padding: "10px 15px",
-  borderRadius: "8px",
-  border: "none",
+  padding: "12px",
+  fontSize: "14px",
+  borderRadius: "10px",
   background: "#111",
-  color: "#fff",
-  cursor: "pointer"
+  color: "#fff"
 }
 
 const smallBtn = {
@@ -192,14 +194,14 @@ const smallBtn = {
 
 const grid = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
   gap: "20px",
   marginTop: "20px"
 }
 
 const card = {
   background: "#fff",
-  padding: "20px",
+  padding: "16px",
   borderRadius: "12px",
   boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
   textAlign: "center" as const,

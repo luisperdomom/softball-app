@@ -24,24 +24,25 @@ export default function TeamsPage() {
   }
 
   async function deleteTeam(id: string) {
-  const confirmDelete = confirm(
-    "⚠️ This will delete the team and all related data. Continue?"
-  )
+  if (!confirm("Delete EVERYTHING?")) return
 
-  if (!confirmDelete) return
+  // players
+  await supabase.from("players").delete().eq("team_id", id)
 
+  // games
+  await supabase
+    .from("games")
+    .delete()
+    .or(`home_team.eq.${id},away_team.eq.${id}`)
+
+  // team
   const { error } = await supabase
     .from("teams")
     .delete()
     .eq("id", id)
 
-  if (error) {
-    console.error("DELETE ERROR:", error)
-    alert(error.message)
-  } else {
-    // 🔥 NO recargar la página
-    setTeams(prev => prev.filter(t => t.id !== id))
-  }
+  if (error) alert(error.message)
+  else fetchTeams()
 }
   async function updateTeam(id: string) {
     await supabase

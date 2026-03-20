@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
-import Link from "next/link"
 
 export default function PlayersPage() {
 
@@ -72,9 +71,7 @@ export default function PlayersPage() {
                 borderRadius: "6px"
               }}
             >
-              <Link href={`/players/${player.id}`}>
               {player.name}
-             </Link>
             </div>
           ))
         ) : (
